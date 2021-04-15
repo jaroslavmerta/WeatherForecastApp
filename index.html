@@ -5,8 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeatherForecast</title>
+    <link rel="stylesheet/less" type="text/css" href="css/style.less" /> 
+    <script src="//cdn.jsdelivr.net/npm/less@3.13" ></script>
 </head>
 <body>
-    
+    <header>
+        <h1>Type the city and see the weatherforecast</br>
+            for next five days from NOW!</h1>
+        <form autocomplete="off" >
+            <div class="autocomplete ">
+                <input  id="myInput" type="text" placeholder="City">
+            </div>
+            <div class="center-block">
+                <button id="b-city_name" class="" type="button">Search</button>
+            </div>
+        </form>
+    </header>
+
+    <section>
+        <div id="forecast" class="forecast-container"></div>
+    </section>
+
+<script src="service.js" type="module"></script>
 </body>
 </html>

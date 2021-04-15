@@ -1,7 +1,3 @@
-export class WeatherForecast {
+'use strict'
 
-    constructor (){
-        this.button = document.getElementById("b-city_name");
-        this.myInput = document.getElementById("myInput");
-    }
-}
+export class Autocomplete {}

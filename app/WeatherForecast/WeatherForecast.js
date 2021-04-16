@@ -91,4 +91,19 @@ export class WeatherForecast {
         }
         return table;
     }
+
+    getTimeRow(){
+        let tHead = document.createElement("thead");
+        let time_row = document.createElement("tr");
+        let time_th = document.createElement("th");
+        time_row.appendChild(time_th);
+        let fakeTimeObjects = TimeUtility.fakeTimeObjects();
+        fakeTimeObjects.forEach(time => {
+            time_th = document.createElement("th");
+            time_th.innerText = time;
+            time_row.appendChild(time_th);
+        });
+        tHead.appendChild(time_row);
+        return tHead;
+        }
 }

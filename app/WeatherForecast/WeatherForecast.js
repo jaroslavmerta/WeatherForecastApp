@@ -184,5 +184,14 @@ export class WeatherForecast {
         return tHead;
         }
 
+    randomCity(){
+        const res = Ajax.fetchToJSON("../data/city.list.json");
+        res.then( cities => {
+            let number = Math.floor(Math.random() * 209579);
+            let city = cities[number];
+            let cityNameId = city.name+","+city.country;
+            this.searchCityId(cityNameId);
+        });
+    }
         
 }

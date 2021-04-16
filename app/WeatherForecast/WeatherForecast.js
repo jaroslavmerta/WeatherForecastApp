@@ -8,6 +8,14 @@ export class WeatherForecast {
         this.myInput = document.getElementById("myInput");
     }
 
+    getWeatherForecast(){
+        this.button.addEventListener("click", () => this.searchCityId(this.myInput.value));
+        window.addEventListener('load', ()=> this.randomCity());
+        const autocomplete = new Autocomplete();
+        autocomplete.getAutocomplete(myInput, "../data/city.list.json");
+        
+    }
+    
     searchCityId(searchText){
         try{
             if (searchText == '' || searchText == null)
@@ -58,7 +66,7 @@ export class WeatherForecast {
             err.warning(err.message, searchText);
         }
     }
-    
+
     //fetches the data from Weather API, creates table and inserts the data in it
     generateTable(url){
         let res = Ajax.fetchToJSON(url);

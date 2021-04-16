@@ -185,9 +185,12 @@ export class WeatherForecast {
         }
 
     getCityHeading(data){
-        let h1= document.getElementsByClassName("city-heading");
-        h1.innerText= data.name + ", " + data.country;
-        this.forecast.appendChild(h1);
+        let h = document.getElementById("city-heading");
+        console.log(h);
+        h.innerText = data.city.name + ", " + data.city.country;
+        console.log(h);
+      
+        
     }
 
     randomCity(){

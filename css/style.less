@@ -1,0 +1,127 @@
+@warning: #da0000;
+
+* {     
+    box-sizing: border-box;
+}
+
+body {
+    font: 16px Arial;  
+    text-align: center;
+
+}
+
+.center-block {
+    margin: 0 auto;
+  
+}
+
+button {
+    margin-top: 10px;
+    font-size: 30px;
+    padding: 0px 15px;
+    cursor: pointer;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+}
+
+/*the container must be positioned relative:*/
+.autocomplete {
+    position: relative;
+    display: inline-block;
+    font-size: 26px;
+}
+
+input {
+    border: 2px solid ;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 20px;
+    margin-top:10px;
+}
+input:focus {
+    outline-width: 0;
+}
+button:focus{
+    outline-width: 0;
+}
+
+
+
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff; 
+    border-bottom: 1px solid #d4d4d4; 
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+    background-color: #e9e9e9; 
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+    background-color: DodgerBlue !important; 
+    color: #ffffff; 
+}
+
+.forecast-container {
+    overflow:auto;
+    margin-top: 30px;
+}
+
+//Table
+
+table {
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-collapse: collapse; 
+    border-bottom: 3px solid #009879;
+    box-shadow: 0 0 20px black;
+    border-radius: 5px 5px 0 0;
+    
+    tr:nth-child(odd){
+        background-color: #dad8d8;
+        color:black;
+      }
+      tr:nth-child(1){
+        background-color: #009879;
+        color:white;
+        padding: 10px;
+        font-size: 25px;
+        
+       
+    }
+    
+    
+    td, th {
+        font-weight: bold;
+        padding: 10px;
+        
+    }
+}
+
+
+
+
+
+//error
+.error-warning{
+    background-color: @warning;
+    padding:10px;
+    border-radius: 10px;
+    }

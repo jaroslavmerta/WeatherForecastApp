@@ -184,6 +184,12 @@ export class WeatherForecast {
         return tHead;
         }
 
+    getCityHeading(data){
+        let h1= document.getElementsByClassName("city-heading");
+        h1.innerText= data.name + ", " + data.country;
+        return h1;
+    }
+
     randomCity(){
         const res = Ajax.fetchToJSON("../data/city.list.json");
         res.then( cities => {

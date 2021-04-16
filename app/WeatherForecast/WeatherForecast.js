@@ -8,6 +8,20 @@ export class WeatherForecast {
         this.myInput = document.getElementById("myInput");
     }
 
+    
+    //fetches the data from Weather API, creates table and inserts the data in it
+    generateTable(url){
+        let res = Ajax.fetchToJSON(url);
+        res.then(data => {
+            let today = TimeUtility.getToday();
+            let div_forecast = document.getElementById("forecast");
+            div_forecast.innerHTML = '';
+
+            let tableRows = this.createTable(data, today);
+            div_forecast.appendChild(tableRows);
+        });
+    }
+
     createTable(data, today){
         let dayParts = 0;
         //cycle: if the data are linked to today make a number record about it
@@ -106,4 +120,6 @@ export class WeatherForecast {
         tHead.appendChild(time_row);
         return tHead;
         }
+
+        
 }

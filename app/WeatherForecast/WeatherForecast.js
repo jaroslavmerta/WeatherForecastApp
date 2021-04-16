@@ -1,5 +1,10 @@
 'use strict'
+import { Ajax } from './../helpers/Ajax.js';
+import { Autocomplete } from './../helpers/Autocomplete.js';
+import { StringUtility } from './../helpers/StringUtility.js';
 import { TimeUtility } from './../helpers/TimeUtility.js';
+import { DataInputError } from '../helpers/DataInputError.js';
+
 
 export class WeatherForecast {
 
@@ -15,7 +20,7 @@ export class WeatherForecast {
         autocomplete.getAutocomplete(myInput, "../data/city.list.json");
         
     }
-    
+
     searchCityId(searchText){
         try{
             if (searchText == '' || searchText == null)

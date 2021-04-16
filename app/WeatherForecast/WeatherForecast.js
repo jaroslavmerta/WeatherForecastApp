@@ -11,6 +11,7 @@ export class WeatherForecast {
     constructor (){
         this.button = document.getElementById("b-city_name");
         this.myInput = document.getElementById("myInput");
+        this.forecast = document.getElementById("forecast");
     }
 
     getWeatherForecast(){
@@ -77,11 +78,9 @@ export class WeatherForecast {
         let res = Ajax.fetchToJSON(url);
         res.then(data => {
             let today = TimeUtility.getToday();
-            let div_forecast = document.getElementById("forecast");
-            div_forecast.innerHTML = '';
-
+            this.forecast.innerHTML = '';
             let tableRows = this.createTable(data, today);
-            div_forecast.appendChild(tableRows);
+            this.forecast.appendChild(tableRows);
         });
     }
 

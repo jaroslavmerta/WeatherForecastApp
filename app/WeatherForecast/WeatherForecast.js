@@ -186,7 +186,7 @@ export class WeatherForecast {
     getCityHeading(data){
         let h1= document.getElementsByClassName("city-heading");
         h1.innerText= data.name + ", " + data.country;
-        return h1;
+        this.forecast.appendChild(h1);
     }
 
     randomCity(){

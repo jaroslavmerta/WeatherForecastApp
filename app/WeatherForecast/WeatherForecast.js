@@ -79,6 +79,7 @@ export class WeatherForecast {
         res.then(data => {
             let today = TimeUtility.getToday();
             this.forecast.innerHTML = '';
+            this.getCityHeading(data);
             let tableRows = this.createTable(data, today);
             this.forecast.appendChild(tableRows);
         });

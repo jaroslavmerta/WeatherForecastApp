@@ -8,6 +8,56 @@ export class WeatherForecast {
         this.myInput = document.getElementById("myInput");
     }
 
+    searchCityId(searchText){
+        try{
+            if (searchText == '' || searchText == null)
+                throw new DataInputError("Enter a city name");
+        
+        if (document.getElementById('error')){
+            let error = document.getElementById('error');
+            error.parentElement.removeChild(error);
+        }
+
+        let res = Ajax.fetchToJSON("../data/city.list.json");
+        res.then( cities => {
+            let cityAttr = StringUtility.checkString(searchText,",");
+            let match;
+            if (!Array.isArray(cityAttr)){
+                match = cities.filter(city => {
+                const regex = new RegExp(`^${cityAttr}$`, 'gi');
+                return city.name.match(regex)
+            });
+            }
+            else{
+                match = cities.filter(city => {
+                const regexName = new RegExp(`^${cityAttr[0]}$`, 'gi');
+                return city.name.match(regexName);
+                });
+                cityAttr[1] = cityAttr[1].toUpperCase();
+                for (let i=0; i < match.length; i++){
+                    if (match[i].country != cityAttr[1])
+                    match.splice(i, 1);
+                }               
+            }
+                try{
+                if (match.length == 0)
+                    throw new DataInputError(`The city name:"${this.myInput.value}" do not exist.`);
+
+                let cityId = match[0].id;
+
+                let lang = StringUtility.checkString(navigator.language,"-");
+                console.log(lang[1]);
+                this.generateTable(`https://api.openweathermap.org/data/2.5/forecast?id=${cityId}&lang=${Array.isArray(lang) ? lang[1]: lang}&units=metric&appid=bbc5944f6705eb9cea716ba2477d4b9d`);
+                }
+                catch(err){ 
+                    err.warning(err.message, searchText);
+                }
+        });
+        }
+        catch (err){
+            err.warning(err.message, searchText);
+        }
+    }
     
     //fetches the data from Weather API, creates table and inserts the data in it
     generateTable(url){

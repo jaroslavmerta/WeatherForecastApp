@@ -97,7 +97,7 @@ export class WeatherForecast {
             break;
         }
         let table = document.createElement("table");
-        table.setAttribute("class", "center-block rwd-table");
+        table.setAttribute("class", "center-block ");
         table.setAttribute("id","forecast-table");
         //řádek s orientačním časem pro data v tabulce
         //the row with a time headlines for every column with a temperature

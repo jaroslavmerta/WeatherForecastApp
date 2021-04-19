@@ -6,27 +6,34 @@ import { Ajax } from "./Ajax.js";
 
 export class Autocomplete {
     
-  
-  getAutocomplete(inp, resourceJSON) {
-    inp.addEventListener("input", ()=> this.generateList(inp, resourceJSON));
+  /**
+   * Performs autocomplete
+   * @param {string} inp The input value
+   * @param {string} url The URL address to send the request to
+   */
+  getAutocomplete(inp, url) {
+    inp.addEventListener("input", ()=> this.generateList(inp, url));
     inp.addEventListener("keydown", (e) => this.keyReaction(e, inp));
   }
 
-    /*If the arrow DOWN, UP key is pressed,
-    increase the currentFocus variable and and make the current item more visible
-    If the ENTER is pressed, get value from autocomplete list into input, or proccess the data in input*/
+    /**
+     * If the arrow DOWN, UP key is pressed,
+     * increase the currentFocus variable and and make the current item more visible
+     * If the ENTER is pressed, get value from autocomplete list into input, or proccess the data in input
+     * @param {object} e Event object
+     */
   keyReaction(e){
-      let item = document.getElementsByClassName("autocomplete-item");
+      let items = document.getElementsByClassName("autocomplete-item");
       if (e.keyCode == 40 && (!this.currentFocus > -1 || this.currentFocus != undefined)) {
         this.currentFocus++;
-        this.addActive(item);
+        this.addActive(items);
       } else if (e.keyCode == 38 && (!this.currentFocus > -1 || this.currentFocus != undefined)) { //up
         this.currentFocus--;
-        this.addActive(item);
+        this.addActive(items);
       } else if (e.keyCode == 13) {
         e.preventDefault();       
         if (this.currentFocus > -1) {
-          if (item) item[this.currentFocus].click();
+          if (items) items[this.currentFocus].click();
           this.currentFocus= -1;
           console.log(this.currentFocus);
         }
@@ -37,8 +44,13 @@ export class Autocomplete {
       }
   }
   
-  generateList(inp, resourceJSON){
-      const res = Ajax.fetchToJSON(resourceJSON);
+  /**
+   * Creates list of possible city names as a autocomplete
+   * @param {string} inp The input value 
+   * @param {string} url The URL address to send the request to
+   */
+  generateList(inp, url){
+      const res = Ajax.fetchToJSON(url);
       res.then( cities => {
       this.closeAllLists();
       
@@ -74,16 +86,20 @@ export class Autocomplete {
         divList.setAttribute("class", "autocomplete-items");
         divList.appendChild(frag);
         
-        let firstItem = divList.getElementsByTagName("div");
-        this.addActive(firstItem);
+        let listItems = divList.getElementsByTagName("div");
+        this.addActive(listItems);
 
         inp.parentNode.appendChild(divList);
         };
       });
   }
-
+  /**
+   * Creates list item with a city name and country
+   * @param {object} item City data
+   * @returns {object}
+   */
   generateListItem(item){
-
+    console.log(typeof item); 
     let div;
     div = document.createElement("DIV");
     div.setAttribute('class', "autocomplete-item")
@@ -93,6 +109,9 @@ export class Autocomplete {
     return div;
   }
 
+  /**
+   * Close autocomplete list
+   */
   closeAllLists() {
     let list = document.getElementsByClassName("autocomplete-items");
     for (let i = 0; i < list.length; i++) {
@@ -100,19 +119,26 @@ export class Autocomplete {
     }
   }
 
-    /*a function to classify an item as "active":*/
-  addActive(item) {
-    if (!item) return false;
-    this.removeActive(item);
-    if (this.currentFocus >= item.length) this.currentFocus = 0;
-    if (this.currentFocus < 0) this.currentFocus = (item.length - 1);
-    item[this.currentFocus].classList.add("autocomplete-active");
+  /**
+   * Classify an item as "active"
+   * @param {object} items HTML collection of autocomplete list
+   * @returns {boolean} If item is not present
+   */
+  addActive(items) {
+    if (!items) return false;
+    this.removeActive(items);
+    if (this.currentFocus >= items.length) this.currentFocus = 0;
+    if (this.currentFocus < 0) this.currentFocus = (items.length - 1);
+    items[this.currentFocus].classList.add("autocomplete-active");
   }
 
-    /*a function to remove the "active" class from all autocomplete items:*/
-  removeActive(item) {
-    for (let i = 0; i < item.length; i++) {
-      item[i].classList.remove("autocomplete-active");
+    /**
+     * Removes the "active" class from all autocomplete items
+     * @param {object} item HTML collection of autocomplete list
+     */
+  removeActive(items) {
+    for (let i = 0; i < items.length; i++) {
+      items[i].classList.remove("autocomplete-active");
     }
   }
 }

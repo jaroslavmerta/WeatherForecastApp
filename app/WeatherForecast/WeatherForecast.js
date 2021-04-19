@@ -20,8 +20,8 @@ export class WeatherForecast {
      * Performs weather forecast
      */
     getWeatherForecast(){
-        this.button.addEventListener("click", () => this.searchCityId(this.myInput.value));
-        window.addEventListener('load', ()=> this.randomCity());
+        this.button.addEventListener("click", () => this._searchCityId(this.myInput.value));
+        window.addEventListener('load', ()=> this._randomCity());
         const autocomplete = new Autocomplete();
         autocomplete.getAutocomplete(myInput, "../data/city.list.json");
         
@@ -31,7 +31,7 @@ export class WeatherForecast {
      * Searches for a string entered from input in JSON file with city names
      * @param {string} searchedText The input value, that is searched for in the file
      */
-    searchCityId(searchedText){
+    _searchCityId(searchedText){
         try{
             if (searchedText == '' || searchedText == null)
                 throw new DataInputError("Enter a city name");
@@ -70,7 +70,7 @@ export class WeatherForecast {
 
                 let lang = StringUtility.checkString(navigator.language,"-");
                 console.log(lang[1]);
-                this.generateTable(`https://api.openweathermap.org/data/2.5/forecast?id=${cityId}&lang=${Array.isArray(lang) ? lang[1]: lang}&units=metric&appid=bbc5944f6705eb9cea716ba2477d4b9d`);
+                this._generateTable(`https://api.openweathermap.org/data/2.5/forecast?id=${cityId}&lang=${Array.isArray(lang) ? lang[1]: lang}&units=metric&appid=bbc5944f6705eb9cea716ba2477d4b9d`);
                 }
                 catch(err){ 
                     err.warning(err.message, searchedText);
@@ -86,13 +86,13 @@ export class WeatherForecast {
      *Fetches data from Weather API, creates a table and inserts data in it 
      * @param {string} url The URL address to send the request to
      */
-    generateTable(url){
+    _generateTable(url){
         let res = Ajax.fetchToJSON(url);
         res.then(data => {
             let today = TimeUtility.getToday();
             this.forecast.innerHTML = '';
-            this.getCityHeading(data);
-            let tableRows = this.createTable(data, today);
+            this._getCityHeading(data);
+            let tableRows = this._createTable(data, today);
             this.forecast.appendChild(tableRows);
         });
     }
@@ -103,7 +103,7 @@ export class WeatherForecast {
      * @param {number} today Today numerically expressed as the day of the week
      * @returns {object}
      */
-    createTable(data, today){
+    _createTable(data, today){
         let dayParts = 0;
         //cycle: if the data are linked to today make a number record about it
         for( let list of data.list){
@@ -119,7 +119,7 @@ export class WeatherForecast {
         table.setAttribute("id","forecast-table");
 
         //the row with a time headlines for every column with a temperature
-        let time_row = this.getTimeRow();
+        let time_row = this._getTimeRow();
         table.appendChild(time_row);
 
         //new row and a cell with name of the day for a first day of forecast
@@ -191,7 +191,7 @@ export class WeatherForecast {
      * Creates table a row with formatted time data
      * @returns {object}
      */
-    getTimeRow(){
+    _getTimeRow(){
         let tHead = document.createElement("thead");
         let time_row = document.createElement("tr");
         let time_th = document.createElement("th");
@@ -210,7 +210,7 @@ export class WeatherForecast {
      * Fills heading tag with a city name and country
      * @param {object} data Weather data with the current city name
      */
-    getCityHeading(data){
+    _getCityHeading(data){
         let h = document.getElementById("city-heading");
         h.innerText = data.city.name + ", " + data.city.country;
       
@@ -219,13 +219,13 @@ export class WeatherForecast {
     /**
      * Searches a random city from a JSON file
      */
-    randomCity(){
+    _randomCity(){
         const res = Ajax.fetchToJSON("../data/city.list.json");
         res.then( cities => {
             let number = Math.floor(Math.random() * 209579);
             let city = cities[number];
             let cityNameId = city.name+","+city.country;
-            this.searchCityId(cityNameId);
+            this._searchCityId(cityNameId);
         });
     }
         

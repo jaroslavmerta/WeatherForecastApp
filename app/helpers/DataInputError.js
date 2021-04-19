@@ -1,12 +1,21 @@
 'use strict'
 
 export class DataInputError extends Error{
+
+    /**
+     * Instance initialization
+     * @param {string} message 
+     */
     constructor (message) {
         super(message);
         this.name = "DataInputError";
 
     }
-
+    /**
+     * Creates error message above input if an error occurs
+     * @param {string} errorMessage 
+     * @param {string} searchText 
+     */
     warning(errorMessage, searchText){
         console.log(typeof searchText);
         if ( !document.getElementById('error')){

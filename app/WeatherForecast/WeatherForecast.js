@@ -29,7 +29,7 @@ export class WeatherForecast {
 
     /**
      * Searches for a string entered from input in JSON file with city names
-     * @param {string} searchedText The input data
+     * @param {string} searchedText The input value, that is searched for in the file
      */
     searchCityId(searchedText){
         try{
@@ -84,7 +84,7 @@ export class WeatherForecast {
 
     /**
      *Fetches data from Weather API, creates a table and inserts data in it 
-     * @param {string} url 
+     * @param {string} url The URL address to send the request to
      */
     generateTable(url){
         let res = Ajax.fetchToJSON(url);
@@ -99,9 +99,9 @@ export class WeatherForecast {
 
     /**
      * Creates a table for a temperature data from OpenWeather API
-     * @param {object} data 
-     * @param {number} today 
-     * @returns  {object}
+     * @param {object} data Weather data that can be listed in a table
+     * @param {number} today Today numerically expressed as the day of the week
+     * @returns {object}
      */
     createTable(data, today){
         let dayParts = 0;
@@ -208,7 +208,7 @@ export class WeatherForecast {
 
     /**
      * Fills heading tag with a city name and country
-     * @param {object} data 
+     * @param {object} data Weather data with the current city name
      */
     getCityHeading(data){
         let h = document.getElementById("city-heading");

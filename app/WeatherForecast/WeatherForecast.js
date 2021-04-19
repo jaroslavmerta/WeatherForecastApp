@@ -8,12 +8,17 @@ import { DataInputError } from '../helpers/DataInputError.js';
 
 export class WeatherForecast {
 
+    /**
+     * Instance initialization
+     */
     constructor (){
         this.button = document.getElementById("b-city_name");
         this.myInput = document.getElementById("myInput");
         this.forecast = document.getElementById("forecast");
     }
-
+    /**
+     * Performs weather forecast
+     */
     getWeatherForecast(){
         this.button.addEventListener("click", () => this.searchCityId(this.myInput.value));
         window.addEventListener('load', ()=> this.randomCity());
@@ -22,9 +27,13 @@ export class WeatherForecast {
         
     }
 
-    searchCityId(searchText){
+    /**
+     * Searches for a string entered from input in JSON file with city names
+     * @param {string} searchedText The input data
+     */
+    searchCityId(searchedText){
         try{
-            if (searchText == '' || searchText == null)
+            if (searchedText == '' || searchedText == null)
                 throw new DataInputError("Enter a city name");
         
         if (document.getElementById('error')){
@@ -34,7 +43,7 @@ export class WeatherForecast {
 
         let res = Ajax.fetchToJSON("../data/city.list.json");
         res.then( cities => {
-            let cityAttr = StringUtility.checkString(searchText,",");
+            let cityAttr = StringUtility.checkString(searchedText,",");
             let match;
             if (!Array.isArray(cityAttr)){
                 match = cities.filter(city => {
@@ -64,16 +73,19 @@ export class WeatherForecast {
                 this.generateTable(`https://api.openweathermap.org/data/2.5/forecast?id=${cityId}&lang=${Array.isArray(lang) ? lang[1]: lang}&units=metric&appid=bbc5944f6705eb9cea716ba2477d4b9d`);
                 }
                 catch(err){ 
-                    err.warning(err.message, searchText);
+                    err.warning(err.message, searchedText);
                 }
         });
         }
         catch (err){
-            err.warning(err.message, searchText);
+            err.warning(err.message, searchedText);
         }
     }
 
-    //fetches the data from Weather API, creates table and inserts the data in it
+    /**
+     *Fetches data from Weather API, creates a table and inserts data in it 
+     * @param {string} url 
+     */
     generateTable(url){
         let res = Ajax.fetchToJSON(url);
         res.then(data => {
@@ -85,6 +97,12 @@ export class WeatherForecast {
         });
     }
 
+    /**
+     * Creates a table for a temperature data from OpenWeather API
+     * @param {object} data 
+     * @param {number} today 
+     * @returns  {object}
+     */
     createTable(data, today){
         let dayParts = 0;
         //cycle: if the data are linked to today make a number record about it
@@ -169,6 +187,10 @@ export class WeatherForecast {
         return table;
     }
 
+    /**
+     * Creates table a row with formatted time data
+     * @returns {object}
+     */
     getTimeRow(){
         let tHead = document.createElement("thead");
         let time_row = document.createElement("tr");
@@ -184,15 +206,19 @@ export class WeatherForecast {
         return tHead;
         }
 
+    /**
+     * Fills heading tag with a city name and country
+     * @param {object} data 
+     */
     getCityHeading(data){
         let h = document.getElementById("city-heading");
-        console.log(h);
         h.innerText = data.city.name + ", " + data.city.country;
-        console.log(h);
       
         
     }
-
+    /**
+     * Searches a random city from a JSON file
+     */
     randomCity(){
         const res = Ajax.fetchToJSON("../data/city.list.json");
         res.then( cities => {

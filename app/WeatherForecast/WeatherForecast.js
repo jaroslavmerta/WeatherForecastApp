@@ -36,10 +36,7 @@ export class WeatherForecast {
             if (searchedText == '' || searchedText == null)
                 throw new DataInputError("Enter a city name");
         
-        if (document.getElementById('error')){
-            let error = document.getElementById('error');
-            error.parentElement.removeChild(error);
-        }
+
 
         let res = Ajax.fetchToJSON("../data/city.list.json");
         res.then( cities => {

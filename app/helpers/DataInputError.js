@@ -17,6 +17,10 @@ export class DataInputError extends Error{
      * @param {string} searchText 
      */
     warning(errorMessage, searchText){
+        if (document.getElementById('error')){
+            let error = document.getElementById('error');
+            error.parentElement.removeChild(error);
+        }
         console.log(typeof searchText);
         if ( !document.getElementById('error')){
         let newE = document.createElement("H4");

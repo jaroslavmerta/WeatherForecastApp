@@ -35,7 +35,6 @@ export class Autocomplete {
         if (this.currentFocus > -1) {
           if (items) items[this.currentFocus].click();
           this.currentFocus= -1;
-          console.log(this.currentFocus);
         }
         else{
           let button = document.getElementById('b-city_name');
@@ -99,7 +98,6 @@ export class Autocomplete {
    * @returns {object}
    */
   _generateListItem(item){
-    console.log(typeof item); 
     let div;
     div = document.createElement("DIV");
     div.setAttribute('class', "autocomplete-item")

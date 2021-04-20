@@ -59,7 +59,6 @@ export class TimeUtility {
             number += 3;
             localTime[i] = date[i].toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         }
-        console.log(localTime);
         return localTime;
     }
 

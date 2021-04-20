@@ -21,7 +21,6 @@ export class DataInputError extends Error{
             let error = document.getElementById('error');
             error.parentElement.removeChild(error);
         }
-        console.log(typeof searchText);
         if ( !document.getElementById('error')){
         let newE = document.createElement("H4");
         newE.setAttribute('id', 'error');

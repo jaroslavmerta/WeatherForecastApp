@@ -23,7 +23,7 @@ export class WeatherForecast {
     getWeatherForecast(){
         this.bSearch.addEventListener("click", () => this._searchCityId(this.myInput.value));
         window.addEventListener('load', ()=> this._getLocalForecast());
-        window.addEventListener('click', () => this._getLocalForecast());
+        this.bMyLocation.addEventListener('click', () => this._getLocalForecast());
         const autocomplete = new Autocomplete();
         autocomplete.getAutocomplete(myInput, "../data/city.list.json");
         
@@ -235,7 +235,7 @@ export class WeatherForecast {
             let errHandler= new ErrorHandler ();
             switch(error.code) {
                 case error.PERMISSION_DENIED:
-                    errHandler.warning("Geolocation is not allowed ");
+                    errHandler.warning("Geolocation is not allowed by user");
                   break;
                 case error.POSITION_UNAVAILABLE:
                 case error.TIMEOUT:

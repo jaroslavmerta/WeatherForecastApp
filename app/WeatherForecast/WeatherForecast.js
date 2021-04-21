@@ -229,13 +229,23 @@ export class WeatherForecast {
     _getLocalForecast(){
         this._getUserLocation()
         .then((position) => this._getUserForecast(position))
-        .catch((err) => {console.log(err);
-            err.warning(err.message)});
+        .catch((error) => {console.log(error);
+            let errHandler= new ErrorHandler ();
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    errHandler.warning("Geolocation is not allowed ");
+                  break;
+                case error.POSITION_UNAVAILABLE:
+                case error.TIMEOUT:
+                    errHandler.warning("Location information is unavailable. Try it later");
+                  break;
+            };
+        });
     }
 
     _getUserLocation(){
         if (navigator.geolocation) {
-            return new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, (err) => reject(new ErrorHandler(`Code: ${err.code}, Message: ${err.message}`))));
+            return new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject));
           } else {
             throw new ErrorHandler("Geolocation is not supported by this browser.");
           }
@@ -253,7 +263,7 @@ export class WeatherForecast {
         
         this._generateTable(url);
       }
-      //{throw new ErrorHandler(`Code: ${code}, Message: ${message}`)}
+      //{throw new ErrorHandler(`Code: ${code}, Message: ${message}`)} ;; new ErrorHandler(`Code: ${err.code}, Message: ${err.message}`)
             
         
 }

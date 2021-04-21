@@ -12,16 +12,18 @@ export class WeatherForecast {
      * Instance initialization
      */
     constructor (){
-        this.button = document.getElementById("b-city_name");
+        this.bSearch = document.getElementById("b-city_name");
         this.myInput = document.getElementById("myInput");
         this.forecast = document.getElementById("forecast");
+        this.bMyLocation = document.getElementById("b-my_location");
     }
     /**
      * Performs weather forecast
      */
     getWeatherForecast(){
-        this.button.addEventListener("click", () => this._searchCityId(this.myInput.value));
+        this.bSearch.addEventListener("click", () => this._searchCityId(this.myInput.value));
         window.addEventListener('load', ()=> this._getLocalForecast());
+        window.addEventListener('click', () => this._getLocalForecast());
         const autocomplete = new Autocomplete();
         autocomplete.getAutocomplete(myInput, "../data/city.list.json");
         

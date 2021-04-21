@@ -14,9 +14,8 @@ export class ErrorHandler extends Error{
     /**
      * Creates error message above input if an error occurs
      * @param {string} errorMessage 
-     * @param {string} searchText 
      */
-    warning(errorMessage, searchText){
+    warning(errorMessage){
         this.removeError();
         if ( !document.getElementById('error')){
         let newE = document.createElement("H4");

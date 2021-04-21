@@ -74,12 +74,12 @@ export class WeatherForecast {
                 this._generateTable(`https://api.openweathermap.org/data/2.5/forecast?id=${cityId}&lang=${Array.isArray(lang) ? lang[1]: lang}&units=metric&appid=bbc5944f6705eb9cea716ba2477d4b9d`);
                 }
                 catch(err){ 
-                    err.warning(err.message, searchedText);
+                    err.warning(err.message);
                 }
         });
         }
         catch (err){
-            err.warning(err.message, searchedText);
+            err.warning(err.message);
         }
     }
 

@@ -65,6 +65,9 @@ export class WeatherForecast {
                 if (match.length == 0)
                     throw new ErrorHandler(`The city name:"${this.myInput.value}" do not exist.`);
 
+                let errorHandler = new ErrorHandler();
+                errorHandler.removeError();
+
                 let cityId = match[0].id;
 
                 let lang = StringUtility.checkString(navigator.language,"-");

@@ -224,5 +224,18 @@ export class WeatherForecast {
             this._searchCityId(cityNameId);
         });
     }
+
+    _getLocation(){
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this._showPosition);
+          } else {
+            throw new DataInputError("Geolocation is not supported by this browser.");
+          }
+    }
+
+    _showPosition(position) {
+        console.log( "Latitude: " + position.coords.latitude +
+        "Longitude: " + position.coords.longitude);
+      }
         
 }

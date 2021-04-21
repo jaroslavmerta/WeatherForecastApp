@@ -21,7 +21,7 @@ export class WeatherForecast {
      */
     getWeatherForecast(){
         this.button.addEventListener("click", () => this._searchCityId(this.myInput.value));
-        window.addEventListener('load', ()=> this._getUserLocation());
+        window.addEventListener('load', ()=> this._getLocalForecast());
         const autocomplete = new Autocomplete();
         autocomplete.getAutocomplete(myInput, "../data/city.list.json");
         
@@ -226,9 +226,16 @@ export class WeatherForecast {
         });
     }
 
+    _getLocalForecast(){
+        this._getUserLocation()
+        .then((position) => this._getUserForecast(position))
+        .catch((err) => {console.log(err);
+            err.warning(err.message)});
+    }
+
     _getUserLocation(){
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((p) => this._getUserForecast(p), );
+            return new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, (err) => reject(new ErrorHandler(`Code: ${err.code}, Message: ${err.message}`))));
           } else {
             throw new ErrorHandler("Geolocation is not supported by this browser.");
           }
@@ -246,5 +253,7 @@ export class WeatherForecast {
         
         this._generateTable(url);
       }
+      //{throw new ErrorHandler(`Code: ${code}, Message: ${message}`)}
+            
         
 }

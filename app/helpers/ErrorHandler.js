@@ -1,6 +1,6 @@
 'use strict'
 
-export class DataInputError extends Error{
+export class ErrorHandler extends Error{
 
     /**
      * Instance initialization
@@ -8,7 +8,7 @@ export class DataInputError extends Error{
      */
     constructor (message) {
         super(message);
-        this.name = "DataInputError";
+        this.name = "ErrorHandler";
 
     }
     /**

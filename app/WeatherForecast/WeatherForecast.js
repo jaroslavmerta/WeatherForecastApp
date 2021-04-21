@@ -3,7 +3,7 @@ import { Ajax } from './../helpers/Ajax.js';
 import { Autocomplete } from './../helpers/Autocomplete.js';
 import { StringUtility } from './../helpers/StringUtility.js';
 import { TimeUtility } from './../helpers/TimeUtility.js';
-import { DataInputError } from '../helpers/DataInputError.js';
+import { ErrorHandler } from '../helpers/ErrorHandler.js';
 
 
 export class WeatherForecast {
@@ -34,7 +34,7 @@ export class WeatherForecast {
     _searchCityId(searchedText){
         try{
             if (searchedText == '' || searchedText == null)
-                throw new DataInputError("Enter a city name");
+                throw new ErrorHandler("Enter a city name");
         
 
 
@@ -61,7 +61,7 @@ export class WeatherForecast {
             }
                 try{
                 if (match.length == 0)
-                    throw new DataInputError(`The city name:"${this.myInput.value}" do not exist.`);
+                    throw new ErrorHandler(`The city name:"${this.myInput.value}" do not exist.`);
 
                 let cityId = match[0].id;
 
@@ -228,9 +228,9 @@ export class WeatherForecast {
 
     _getUserLocation(){
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((p) => this._getUserForecast(p));
+            navigator.geolocation.getCurrentPosition((p) => this._getUserForecast(p), );
           } else {
-            throw new DataInputError("Geolocation is not supported by this browser.");
+            throw new ErrorHandler("Geolocation is not supported by this browser.");
           }
     }
 

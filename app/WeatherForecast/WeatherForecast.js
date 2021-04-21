@@ -21,7 +21,7 @@ export class WeatherForecast {
      */
     getWeatherForecast(){
         this.button.addEventListener("click", () => this._searchCityId(this.myInput.value));
-        window.addEventListener('load', ()=> this._randomCity());
+        window.addEventListener('load', ()=> this._getUserLocation());
         const autocomplete = new Autocomplete();
         autocomplete.getAutocomplete(myInput, "../data/city.list.json");
         
@@ -222,20 +222,29 @@ export class WeatherForecast {
             let city = cities[number];
             let cityNameId = city.name+","+city.country;
             this._searchCityId(cityNameId);
+            
         });
     }
 
-    _getLocation(){
+    _getUserLocation(){
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(this._showPosition);
+            navigator.geolocation.getCurrentPosition((p) => this._getUserForecast(p));
           } else {
             throw new DataInputError("Geolocation is not supported by this browser.");
           }
     }
 
-    _showPosition(position) {
-        console.log( "Latitude: " + position.coords.latitude +
-        "Longitude: " + position.coords.longitude);
+    _getUserForecast(position) {
+        let coord = {
+            lat : position.coords.latitude,
+            long : position.coords.longitude};
+            
+        
+        let lang = StringUtility.checkString(navigator.language,"-");
+
+        let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${coord.lat}&lon=${coord.long}&lang=${Array.isArray(lang) ? lang[1]: lang}&units=metric&appid=bbc5944f6705eb9cea716ba2477d4b9d`;
+        
+        this._generateTable(url);
       }
         
 }

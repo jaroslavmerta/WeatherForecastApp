@@ -26,7 +26,6 @@ export class WeatherForecast {
         this.bMyLocation.addEventListener('click', () => this._getLocalForecast());
         const autocomplete = new Autocomplete();
         autocomplete.getAutocomplete(myInput, "../data/city.list.json");
-        
     }
 
     /**
@@ -214,11 +213,10 @@ export class WeatherForecast {
     _getCityHeading(data){
         let h = document.getElementById("city-heading");
         h.innerText = data.city.name + ", " + data.city.country;
-      
-        
     }
     /**
      * Searches a random city from a JSON file
+     * tip: use as event listener
      */
     _randomCity(){
         const res = Ajax.fetchToJSON("../data/city.list.json");
@@ -267,8 +265,6 @@ export class WeatherForecast {
         let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${coord.lat}&lon=${coord.long}&lang=${Array.isArray(lang) ? lang[1]: lang}&units=metric&appid=bbc5944f6705eb9cea716ba2477d4b9d`;
         
         this._generateTable(url);
-      }
-      //{throw new ErrorHandler(`Code: ${code}, Message: ${message}`)} ;; new ErrorHandler(`Code: ${err.code}, Message: ${err.message}`)
-            
+      }   
         
 }

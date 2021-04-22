@@ -11,3 +11,9 @@ Spuštění aplikace lze provést přes otevření souboru index.html v prohlí�
 Prohlížeče:
 
 Popis vnitřní struktury
+V aplikaci je použit objektový programovací přístup.
+Adresář app s javascriptovými třídami je rozdělen na tři moduly, a to:
+1. modul Autocomplete pro našeptávač
+2. modul WeatherForecast pro předpověď počasí
+3. modul helpers s pomocnými třídami
+

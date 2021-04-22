@@ -231,7 +231,7 @@ export class WeatherForecast {
     _getLocalForecast(){
         this._getUserLocation()
         .then((position) => this._getUserForecast(position))
-        .catch((error) => {console.log(error);
+        .catch((error) => {
             let errHandler= new ErrorHandler ();
             switch(error.code) {
                 case error.PERMISSION_DENIED:

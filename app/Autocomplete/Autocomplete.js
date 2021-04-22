@@ -44,21 +44,21 @@ export class Autocomplete {
   }
   
   /**
-   * Creates list of possible city names as a autocomplete
+   * Creates list of possible name property from object as a autocomplete
    * @param {string} inp The input value 
    * @param {string} url The URL address to send the request to
    */
   _generateList(inp, url){
       const res = Ajax.fetchToJSON(url);
-      res.then( cities => {
+      res.then( object => {
       this._closeAllLists();
       
       let divList, div, val = inp.value;
       if (!val) return false;
       this.currentFocus=-1;
-      let matches = cities.filter(city => {
+      let matches = object.filter(innerObject => {
           const regex = new RegExp(`^${val}`, 'gi');
-          return city.name.match(regex);
+          return innerObject.name.match(regex);
       });
 
         if(matches.length > 0){

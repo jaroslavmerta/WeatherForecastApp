@@ -142,15 +142,13 @@ export class WeatherForecast {
         let countColumns=0;
         let frag = document.createDocumentFragment();
         for (let list of data.list) {
-            
-
+        
             let day = TimeUtility.timeConverter(list.dt);
         
             //creates a cell and adds a temperature in it
             let new_td = document.createElement("td");
             new_td.innerText = Math.round(list.main.temp)+" " + "°C" ;
 
-            
             // if it is the next day's turn, create another row
             // and first cell with a name of the day 
             if (day!==previousDay && day!==today) {
@@ -164,7 +162,6 @@ export class WeatherForecast {
 
             if (missingDayParts != 8 && count==5) countColumns++;
             
-
             if (missingDayParts != 8 && count == 5){
                 if(countColumns == missingDayParts){
                     let emptyTd;
@@ -176,7 +173,6 @@ export class WeatherForecast {
                     }
                 }
             }
-            
             
             new_row.appendChild(new_td);
             if(countColumns == missingDayParts) new_row.appendChild(frag);
@@ -214,9 +210,10 @@ export class WeatherForecast {
         let h = document.getElementById("city-heading");
         h.innerText = data.city.name + ", " + data.city.country;
     }
+
     /**
      * Searches a random city from a JSON file
-     * tip: use as event listener
+     * tip: use as a event listener
      */
     _randomCity(){
         const res = Ajax.fetchToJSON("../data/city.list.json");
@@ -225,10 +222,12 @@ export class WeatherForecast {
             let city = cities[number];
             let cityNameId = city.name+","+city.country;
             this._searchCityId(cityNameId);
-            
         });
     }
 
+    /**
+     * Perfoms weather forecast according to the user's location
+     */
     _getLocalForecast(){
         this._getUserLocation()
         .then((position) => this._getUserForecast(position))
@@ -246,6 +245,10 @@ export class WeatherForecast {
         });
     }
 
+    /**
+     * Returns user's location expressed as latitude and longtitude 
+     * @returns {Promise}
+     */
     _getUserLocation(){
         if (navigator.geolocation) {
             return new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject));
@@ -254,12 +257,15 @@ export class WeatherForecast {
           }
     }
 
+    /**
+     * Creates weather forecast table from the API data
+     * @param {object} position 
+     */
     _getUserForecast(position) {
         let coord = {
             lat : position.coords.latitude,
             long : position.coords.longitude};
             
-        
         let lang = StringUtility.checkString(navigator.language,"-");
 
         let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${coord.lat}&lon=${coord.long}&lang=${Array.isArray(lang) ? lang[1]: lang}&units=metric&appid=bbc5944f6705eb9cea716ba2477d4b9d`;

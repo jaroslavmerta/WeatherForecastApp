@@ -17,3 +17,10 @@ Adresář app s javascriptovými třídami je rozdělen na tři moduly, a to:
 2. modul WeatherForecast pro předpověď počasí
 3. modul helpers s pomocnými třídami
 
+1. Modul slouží jako samostatná třída, kterou lze implementovat kamkoliv, kde je potřeba našeptávač. 
+V hlavní aplikaci stačí pak vytvořit potomka této třídy a upravit si potřebné funkce.
+
+2. Modul je hlavní třídou aplikace implemetující v sobě i třídu Autocomplete. Obsahuje v sobě metody pro zpracování vstupního řetězce a pro vyhodnocení předpovědi v podobě tabulky. 
+Obsahuje metody pro geolokaci, která se automaticky spouští při natčtení stránky nebo při klknutí na tlačítko "moje lokace". Obsahuje i funkci pro vygenerování náhodného města, ale není využita.
+
+3. Modul obsahuje třídy se statickými pomocnými funkcemi pro práci s časem, řetězci a asynchronními operacemi.

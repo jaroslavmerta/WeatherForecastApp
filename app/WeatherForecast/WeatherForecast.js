@@ -1,6 +1,6 @@
 'use strict'
 import { Ajax } from './../helpers/Ajax.js';
-import { Autocomplete } from './../helpers/Autocomplete.js';
+import { Autocomplete } from '../Autocomplete/Autocomplete.js';
 import { StringUtility } from './../helpers/StringUtility.js';
 import { TimeUtility } from './../helpers/TimeUtility.js';
 import { ErrorHandler } from '../helpers/ErrorHandler.js';

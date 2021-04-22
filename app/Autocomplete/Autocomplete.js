@@ -1,6 +1,6 @@
 'use strict'
 
-import { Ajax } from "./Ajax.js";
+import { Ajax } from "../helpers/Ajax.js";
 
 
 

@@ -93,17 +93,17 @@ export class Autocomplete {
       });
   }
   /**
-   * Creates list item with a city name and country
-   * @param {object} item City data
+   * Creates item list with a city name and country
+   * @param {object} city City data
    * @returns {object}
    */
-  _generateListItem(item){
+  _generateListItem(city){
     let div;
     div = document.createElement("DIV");
     div.setAttribute('class', "autocomplete-item")
-    div.innerHTML = `<strong> ${item.name}, ${item.country} </strong>`;
-    div.innerHTML += "<input type='hidden' value='" + item.name + 
-    ", " + item.country + "'>";
+    div.innerHTML = `<strong> ${city.name}, ${city.country} </strong>`;
+    div.innerHTML += "<input type='hidden' value='" + city.name + 
+    ", " + city.country + "'>";
     return div;
   }
 

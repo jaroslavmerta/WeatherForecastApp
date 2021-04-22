@@ -1,6 +1,6 @@
 'use strict'
 import { Ajax } from './../helpers/Ajax.js';
-import { Autocomplete } from '../Autocomplete/Autocomplete.js';
+import { CityAutocomplete } from './CityAutocomplete.js';
 import { StringUtility } from './../helpers/StringUtility.js';
 import { TimeUtility } from './../helpers/TimeUtility.js';
 import { ErrorHandler } from '../helpers/ErrorHandler.js';
@@ -24,8 +24,8 @@ export class WeatherForecast {
         this.bSearch.addEventListener("click", () => this._searchCityId(this.myInput.value));
         window.addEventListener('load', ()=> this._getLocalForecast());
         this.bMyLocation.addEventListener('click', () => this._getLocalForecast());
-        const autocomplete = new Autocomplete();
-        autocomplete.getAutocomplete(myInput, "../data/city.list.json");
+        const cityAutocomplete = new CityAutocomplete();
+        cityAutocomplete.getAutocomplete(myInput, "../data/city.list.json");
     }
 
     /**

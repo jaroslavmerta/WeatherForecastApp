@@ -93,8 +93,8 @@ export class WeatherForecast {
             let today = TimeUtility.getToday();
             this.forecast.innerHTML = '';
             this._getCityHeading(data);
-            let textAnimation = new TextAnimation('.city-heading');
-            textAnimation.getAnimation();
+            let textAnimation = new TextAnimation();
+            textAnimation.getAnimation('.city-heading');
             let tableRows = this._createTable(data, today);
             this.forecast.appendChild(tableRows);
         });

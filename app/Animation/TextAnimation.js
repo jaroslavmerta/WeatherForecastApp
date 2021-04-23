@@ -4,8 +4,8 @@ export class TextAnimation {
     
     constructor(textId){
         this.element = document.querySelector(textId);
-        this.strText = element.textContent;
-        this.splitText = strText.split("");
+        this.strText = this.element.textContent;
+        this.splitText = this.strText.split("");
     }
 
     getAnimation(){
@@ -13,8 +13,13 @@ export class TextAnimation {
     }
 
     addSpanForLetter(element){
+        element.textContent = "";
         for (let i = 0; i <this.splitText.length; i++) {
-            element.innerHTML +="<span>" + this.plitText[i] + "</span>";
+            element.innerHTML +="<span>" + this.splitText[i] + "</span>";
         }
+    }
+
+    addClassForLetter(){
+        const span = this.element.querySelectorAll('span');
     }
 }

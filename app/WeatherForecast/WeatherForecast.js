@@ -4,6 +4,7 @@ import { CityAutocomplete } from './CityAutocomplete.js';
 import { StringUtility } from './../helpers/StringUtility.js';
 import { TimeUtility } from './../helpers/TimeUtility.js';
 import { ErrorHandler } from '../helpers/ErrorHandler.js';
+import { TextAnimation } from './../Animation/TextAnimation.js';
 
 
 export class WeatherForecast {
@@ -92,6 +93,8 @@ export class WeatherForecast {
             let today = TimeUtility.getToday();
             this.forecast.innerHTML = '';
             this._getCityHeading(data);
+            let textAnimation = new TextAnimation('.city-heading');
+            textAnimation.getAnimation();
             let tableRows = this._createTable(data, today);
             this.forecast.appendChild(tableRows);
         });

@@ -8,19 +8,19 @@ Formát času se mění v závislosti na kultuře prohlížeče uživatele. Data
 
 Spuštění aplikace lze provést přes otevření souboru index.html v prohlížeči
 
-Prohlížeče:
+Aplikace podporuje nejnovější verze prohlížečů Chrome, Mozilla Firefox, Microsoft Edge, Opera aSafari
 
 Popis vnitřní struktury
 V aplikaci je použit objektový programovací přístup.
 Adresář app s javascriptovými třídami je rozdělen na tři moduly, a to:
-1. modul Autocomplete pro našeptávač
-2. modul WeatherForecast pro předpověď počasí
-3. modul helpers s pomocnými třídami
 
-1. Modul slouží jako samostatná třída, kterou lze implementovat kamkoliv, kde je potřeba našeptávač. 
-V hlavní aplikaci stačí pak vytvořit potomka této třídy a upravit si potřebné funkce.
+1. Modul Autocomplete pro našeptávač
+    Modul slouží jako samostatná třída, kterou lze implementovat kamkoliv, kde je potřeba našeptávač. 
+    V hlavní aplikaci stačí pak vytvořit potomka této třídy a upravit si potřebné funkce.
 
-2. Modul je hlavní třídou aplikace implemetující v sobě i třídu Autocomplete. Obsahuje v sobě metody pro zpracování vstupního řetězce a pro vyhodnocení předpovědi v podobě tabulky. 
-Obsahuje metody pro geolokaci, která se automaticky spouští při natčtení stránky nebo při klknutí na tlačítko "moje lokace". Obsahuje i funkci pro vygenerování náhodného města, ale není využita.
+2. Modul WeatherForecast pro předpověď počasí
+    Modul je hlavní třídou aplikace implemetující v sobě i třídu Autocomplete. Obsahuje v sobě metody pro zpracování vstupního řetězce a pro vyhodnocení předpovědi v podobě tabulky. 
+    Obsahuje metody pro geolokaci, která se automaticky spouští při natčtení stránky nebo při klknutí na tlačítko "moje lokace". Obsahuje i funkci pro vygenerování náhodného města, ale není využita.
 
-3. Modul obsahuje třídy se statickými pomocnými funkcemi pro práci s časem, řetězci a asynchronními operacemi.
+3. Modul helpers s pomocnými třídami
+    Modul obsahuje třídy se statickými pomocnými funkcemi pro práci s časem, řetězci a asynchronními operacemi.

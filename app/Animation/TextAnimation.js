@@ -2,14 +2,13 @@
 
 export class TextAnimation {
     
-    prepareLetters(textId){
+    constructor(textId){
         this.element = document.querySelector(textId);
         this.strText = this.element.textContent;
         this.splitText = this.strText.split("");
     }
 
-    getAnimation(textId){
-        this.prepareLetters(textId)
+    getAnimation(){
         this.addSpanForLetter(this.element);
         this.getInterval();
     }

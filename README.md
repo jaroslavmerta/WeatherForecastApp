@@ -1,5 +1,5 @@
 # WeatherForecastApp
-Aplikace zobrazuje předpověď teploty na následujících pět dnů podle aktuálního města
+Aplikace zobrazuje předpověď teploty na následujících pět dnů podle aktuálního města.
 Město může uživatel vybrat buď pomocí inputu, nebo geolokace při spuštění aplikace, obnovení stránky nebo kliknutím na tlačítko "moje lokace",
 kdy se vyhledá nejbližší město k aktuální uživatelově lokaci.
 Teplotní předpověď během dne (24h) je rozdělena vždy po třech hodinách a data se načítají od aktuální denní doby,
